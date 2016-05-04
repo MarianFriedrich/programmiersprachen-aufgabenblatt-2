@@ -42,10 +42,51 @@ TEST_CASE("describe_multiplication","[multiplication]")
 }
 TEST_CASE("describe_division","[division]")
 {
-	Vec2 vec{10.0f,10.0f};
+	Vec2 vec{10.0f,25.0f};
 	float divident = 5.0;
 	vec / divident;
 	REQUIRE(vec.x == Approx(2.0f));
+	REQUIRE(vec.y == Approx(5.0f));
+}
+TEST_CASE("describe_free_addition","[free_addition]")
+{
+	Vec2 one{5.0f,5.0f};
+	Vec2 two{2.5f,3.5f};
+	Vec2 result = one + two;
+	REQUIRE(result.x == Approx(7.5f));
+	REQUIRE(result.y == Approx(8.5f));
+}
+TEST_CASE("describe_free_subtraction","[free_subtraction]")
+{
+	Vec2 one{5.0f,5.0f};
+	Vec2 two{2.5f,3.5f};
+	Vec2 result = one - two;
+	REQUIRE(result.x == Approx(2.5f));
+	REQUIRE(result.y == Approx(1.5f));
+}
+TEST_CASE("describe_free_multiplication","[free_multiplication]")
+{
+	Vec2 one{5.0f,6.0f};
+	float x = 2.0f;
+	Vec2 result = one * x;
+	REQUIRE(result.x == Approx(10.0f));
+	REQUIRE(result.y == Approx(12.0f));
+}
+TEST_CASE("describe_free_multiplication_rev","[free_multiplication_rev]")
+{
+	Vec2 one{5.0f,6.0f};
+	float x = 2.0f;
+	Vec2 result = x * one;
+	REQUIRE(result.x == Approx(10.0f));
+	REQUIRE(result.y == Approx(12.0f));
+}
+TEST_CASE("describe_free_division","[free_division]")
+{
+	Vec2 one{5.0f,6.0f};
+	float x = 2.0f;
+	Vec2 result = one / x;
+	REQUIRE(result.x == Approx(2.5f));
+	REQUIRE(result.y == Approx(3.0f));
 }
 
 int main(int argc, char *argv[])
