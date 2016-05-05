@@ -1,10 +1,11 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 #include "vec2.hpp"
+#include "mat2.hpp"
 
-//struct
-
-
+/*
+ *	Vector
+ */
 TEST_CASE("describe_struct","[struct]")
 {
 	Vec2 origin;
@@ -87,6 +88,46 @@ TEST_CASE("describe_free_division","[free_division]")
 	Vec2 result = one / x;
 	REQUIRE(result.x == Approx(2.5f));
 	REQUIRE(result.y == Approx(3.0f));
+}
+/*
+ *	Matrix
+ */
+TEST_CASE("describe_struct_mat","[struct_mat]")
+{
+	Mat2 origin{};
+	REQUIRE(origin.x1 == 1.0f);
+	REQUIRE(origin.x2 == 0.0f);
+	REQUIRE(origin.y1 == 0.0f);
+	REQUIRE(origin.y2 == 1.0f);
+}
+TEST_CASE("describe_user_constructor_mat","[user_constructor_mat]")
+{
+	Mat2 user_constructor{1.0f,1.5f,2.0f,2.5f};
+	REQUIRE(user_constructor.x1 == Approx(1.0f));
+	REQUIRE(user_constructor.x2 == Approx(1.5f));
+	REQUIRE(user_constructor.y1 == Approx(2.0f));
+	REQUIRE(user_constructor.y2 == Approx(2.5f));
+}
+TEST_CASE("describe_mat_multiplication","[mat_multiplication]")
+{
+	Mat2 one{5.0f,3.0f,2.0f,4.0f};
+	Mat2 two{1.0f,6.0f,4.0f,3.0f};
+	one *= two;
+	REQUIRE(one.x1 == Approx(17.0f));
+	REQUIRE(one.x2 == Approx(39.0f));
+	REQUIRE(one.y1 == Approx(18.0f));
+	REQUIRE(one.y2 == Approx(24.0f));
+}
+TEST_CASE("describe_mat_multiplication_free","[mat_multiplication_free]")
+{
+	Mat2 one{5.0f,3.0f,2.0f,4.0f};
+	Mat2 two{1.0f,6.0f,4.0f,3.0f};
+	Mat2 result;
+	result = one * two;
+	REQUIRE(result.x1 == Approx(17.0f));
+	REQUIRE(result.x2 == Approx(39.0f));
+	REQUIRE(result.y1 == Approx(18.0f));
+	REQUIRE(result.y2 == Approx(24.0f));
 }
 
 int main(int argc, char *argv[])
