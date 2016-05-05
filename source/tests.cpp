@@ -129,7 +129,60 @@ TEST_CASE("describe_mat_multiplication_free","[mat_multiplication_free]")
 	REQUIRE(result.y1 == Approx(18.0f));
 	REQUIRE(result.y2 == Approx(24.0f));
 }
-
+TEST_CASE("describe_multiplication_vec_mat","[multiplication_vec_mat]")
+{
+	Mat2 one{1.0f,2.0f,3.0f,4.0f};
+	Vec2 two{1.0f,2.0f};
+	Vec2 result;
+	result = one * two;
+	REQUIRE(result.x == Approx(5.0f));
+	REQUIRE(result.y == Approx(11.0f));
+}
+TEST_CASE("describe_multiplication_vec_mat_rev","[multiplication_vec_mat_rev]")
+{
+	Mat2 one{1.0f,2.0f,3.0f,4.0f};
+	Vec2 two{1.0f,2.0f};
+	Vec2 result;
+	result = two * one;
+	REQUIRE(result.x == Approx(5.0f));
+	REQUIRE(result.y == Approx(11.0f));
+}
+TEST_CASE("describe_mat_inverse","[mat_inverse]")
+{
+	Mat2 regular{1.0f,2.0f,3.0f,4.0f};
+	Mat2 inv;
+	inv = inverse(regular);
+	REQUIRE(inv.x1 == Approx(-2.0f));
+	REQUIRE(inv.x2 == Approx(1.0f));
+	REQUIRE(inv.y1 == Approx(1.5f));
+	REQUIRE(inv.y2 == Approx(-0.5f));
+}
+TEST_CASE("describe_mat_transpose","[mat_transpose]")
+{
+	Mat2 regular{1.0f,2.0f,3.0f,4.0f};
+	Mat2 trans;
+	trans = transpose(regular);
+	REQUIRE(trans.x1 == Approx(1.0f));
+	REQUIRE(trans.x2 == Approx(3.0f));
+	REQUIRE(trans.y1 == Approx(2.0f));
+	REQUIRE(trans.y2 == Approx(4.0f));
+}
+TEST_CASE("describe_mat_rotation","[mat_rotation]")
+{
+	Mat2 regular{1.0f,2.0f,3.0f,4.0f};
+	Mat2 rotation = make_rotation_mat2(180);
+	regular *= rotation;
+	REQUIRE(regular.x1 == Approx(-2.20077f));
+	REQUIRE(regular.x2 == Approx(-0.395768f));
+	REQUIRE(regular.y1 == Approx(-4.99999f));
+	REQUIRE(regular.y2 == Approx( 0.009618f));
+}
+TEST_CASE("describe_mat_determinante","[mat_determinante]")
+{
+	Mat2 regular{1.0f,2.0f,3.0f,4.0f};
+	float dete = regular.det();
+	REQUIRE(dete == Approx(-2.0f));
+}
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
