@@ -50,14 +50,3 @@ Mat2 make_rotation_mat2(float phi){
 	rot.y2 = cos(phi);
 	return rot;
 }
-//Determinante
-/*
-float det(){
-	Mat2 temp = *this;
-	return (temp.x1 * temp.y2) - (temp.y1 * temp.x2);
-}
-
-float det(){
-	return (x1 * y2) - (y1 * x2);
-}
-*/
