@@ -5,6 +5,7 @@
 #include "mat2.hpp"
 #include "color.hpp"
 #include "circle.hpp"
+#include "rect.hpp"
 
 /*
  *	Vector
@@ -314,8 +315,39 @@ TEST_CASE("describe_circle_set_center","[circle_set_center]")
 	REQUIRE(kreis.center().x == point.x);
 	REQUIRE(kreis.center().y == point.y);
 }
+//Rectangle Constructor
+TEST_CASE("describe_rect_const","[rect_const]")
+{
+	Vec2 point{5.0,5.0};
+	Color farbe{1.0,1.0,0.0};
+	Rect test{point,farbe,5.0f,2.0f};
+	REQUIRE(test.center_.x == point.x);
+	REQUIRE(test.center_.y == point.y);
+	REQUIRE(test.right_ == 5.0f);
+	REQUIRE(test.down_  == 2.0f);
+	REQUIRE(test.color_.r  == farbe.r);
+	REQUIRE(test.color_.g  == farbe.g);
+	REQUIRE(test.color_.b  == farbe.b);
+}
+//Circle circumference
+TEST_CASE("describe_circle_get_circumference","[circle_get_circumference]")
+{
+	float radius = 10.0;
+	Vec2 point{5.0,5.0};
+	Color farbe{1.0,1.0,0.0};
+	Circle kreis{point,radius,farbe};
 
+	REQUIRE(kreis.circumference() == Approx(62.8319f));
+}
+//Rectangle circumference
+TEST_CASE("describe_rect_get_circumference","[rect_get_circumference]")
+{
+	Vec2 point{5.0f,5.0f};
+	Color farbe{1.0,1.0,0.0};
+	Rect test{point,farbe,5.0f,5.0f};
 
+	REQUIRE(test.circumference() == Approx(20.0f));
+}
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

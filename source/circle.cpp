@@ -33,6 +33,10 @@ Bbox Circle::bounding_box()const{
 	Bbox box{temp.center(),temp.radius()};
 	return box;
 }
+float Circle::circumference() const{
+	Circle temp = *this;
+	return 2 * temp.radius_ * M_PI;
+}
 /*
  * SETTER
  */

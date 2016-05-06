@@ -9,6 +9,7 @@ public:
 	Circle(Vec2 const& ctr,float r,Color const& clr);
 	//getter:
 	float 	area() const;
+	float	circumference() const;
 	float 	radius() const;
 	Color 	color() const;
 	Vec2 	center() const;
